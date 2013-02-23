@@ -1,0 +1,37 @@
+\documentclass{article}
+  \usepackage{etoolbox}
+  \usepackage[normalem]{ulem}
+  \usepackage[american]{babel}
+  \usepackage{csquotes}
+  \usepackage[backend=biber]{biblatex}
+  \usepackage{biblatex}
+
+  \addbibresource{GradTexts.bib}
+  \begin{document}
+    \section{Introduction}
+      Warning this list may not be entirely accurate and may contain errors.
+      Titles may be incomplete, missing subtitles, or other problems, but be careful as their are a few books with similar titles.
+      Authors should be correct, but I may have made a mistake.
+      ISBNs should be correct, but might be mistaken for a similar titled book or the softcover edition or it is possible there was a new edition release.
+
+    \section{Graduate Texts in Mathematics}
+      \begin{enumerate}
+        \forcsvlist{\listadd\own}{1, 2, 3, 23, 63, 135, 162, 214, 244, 266}
+        \newcounter{countto}
+        \setcounter{countto}{266}
+
+        \newcounter{gtm}
+        \setcounter{gtm}{1}
+        \newbool{remGTM}
+        \booltrue{remGTM}
+        \newcommand{\gtmbook}[1]{\mbox{\cite{gtm#1}\citetitle{gtm#1}}}
+        \whileboolexpr{bool {remGTM}}{
+        \item\xifinlist{\arabic{gtm}}{\own}{\sout{\gtmbook{\arabic{gtm}}}}{\gtmbook{\arabic{gtm}}}
+
+          \addtocounter{gtm}{1}
+          \ifnumgreater{\value{gtm}}{\value{countto}}{\boolfalse{remGTM}}{\booltrue{remGTM}}
+        }
+      \end{enumerate}
+
+    \printbibliography
+  \end{document}
