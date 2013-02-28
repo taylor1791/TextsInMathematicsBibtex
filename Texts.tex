@@ -7,6 +7,7 @@
   \usepackage{biblatex}
 
   \addbibresource{GradTexts.bib}
+  \addbibresource{UndergradTexts.bib}
   \begin{document}
     \section{Introduction}
       Warning this list may not be entirely accurate and may contain errors.
@@ -15,23 +16,47 @@
       ISBNs should be correct, but might be mistaken for a similar titled book or the softcover edition or it is possible there was a new edition release.
 
     \section{Graduate Texts in Mathematics}
-      \begin{enumerate}
-        \forcsvlist{\listadd\own}{1, 2, 3, 23, 63, 135, 162, 214, 244, 266}
-        \newcounter{countto}
-        \setcounter{countto}{266}
+      \begin{refsection}
+        \begin{enumerate}
+          \forcsvlist{\listadd\gown}{1, 2, 3, 17, 23, 63, 135, 162, 214, 244, 266}
+          \newcounter{countto}
+          \setcounter{countto}{266}
 
-        \newcounter{gtm}
-        \setcounter{gtm}{1}
-        \newbool{remGTM}
-        \booltrue{remGTM}
-        \newcommand{\gtmbook}[1]{\mbox{\cite{gtm#1}\citetitle{gtm#1}}}
-        \whileboolexpr{bool {remGTM}}{
-        \item\xifinlist{\arabic{gtm}}{\own}{\sout{\gtmbook{\arabic{gtm}}}}{\gtmbook{\arabic{gtm}}}
+          \newcounter{gtm}
+          \setcounter{gtm}{1}
+          \newbool{remGTM}
+          \booltrue{remGTM}
+          \newcommand{\gtmbook}[1]{\mbox{\cite{gtm#1}\citetitle{gtm#1}}}
+          \whileboolexpr{bool {remGTM}}{
+            \item\xifinlist{\arabic{gtm}}{\gown}{\sout{\gtmbook{\arabic{gtm}}}}{\gtmbook{\arabic{gtm}}}
 
-          \addtocounter{gtm}{1}
-          \ifnumgreater{\value{gtm}}{\value{countto}}{\boolfalse{remGTM}}{\booltrue{remGTM}}
-        }
-      \end{enumerate}
+            \addtocounter{gtm}{1}
+            \ifnumgreater{\value{gtm}}{\value{countto}}{\boolfalse{remGTM}}{\booltrue{remGTM}}
+          }
+        \end{enumerate}
 
-    \printbibliography
+
+        \printbibliography
+      \end{refsection}
+    \section{Undergraduate Texts in Mathematics}
+      \begin{refsection}
+        \begin{enumerate}
+          \forcsvlist{\listadd\uown}{7}
+          \setcounter{countto}{156}
+
+          \newcounter{utm}
+          \setcounter{utm}{1}
+          \newbool{remUTM}
+          \booltrue{remUTM}
+          \newcommand{\utmbook}[1]{\mbox{\cite{utm#1}\citetitle{utm#1}}}
+          \whileboolexpr{bool {remUTM}}{
+            \item\xifinlist{\arabic{utm}}{\uown}{\sout{\utmbook{\arabic{utm}}}}{\utmbook{\arabic{utm}}}
+
+            \addtocounter{utm}{1}
+            \ifnumgreater{\value{utm}}{\value{countto}}{\boolfalse{remUTM}}{\booltrue{remUTM}}
+          }
+        \end{enumerate}
+
+        \printbibliography
+      \end{refsection}
   \end{document}
